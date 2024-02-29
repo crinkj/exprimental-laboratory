@@ -9,4 +9,5 @@ interface CrewRepository : JpaRepository<Crew, Long> {
 
     @EntityGraph(attributePaths = ["members"], type = EntityGraph.EntityGraphType.FETCH)
     fun findAllBy(): List<Crew>
+
 }

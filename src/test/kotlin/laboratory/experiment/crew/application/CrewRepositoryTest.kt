@@ -46,9 +46,24 @@ class CrewRepositoryTest @Autowired constructor(
     }
 
     @Test
-    @DisplayName("크루를 조회할 경우 N+1이 발생하는지 테스트한다.")
+    @DisplayName("크루를 조회할 경우 N+1이 발생한다.")
     @Transactional
-    fun test_N_PLUS_ONE() {
+    fun cause_n_plus_one() {
+        println("================== START ====================")
+
+        val crews = crewRepository.findAll()
+        crews.forEach {
+            it.members.first().name
+        }
+
+        println("================== END ====================")
+    }
+
+
+    @Test
+    @DisplayName("크루를 조회할 경우 N+1이 발생하지 않는다.")
+    @Transactional
+    fun prevent_n_plus_one() {
         println("================== START ====================")
 
         val crews = crewRepository.findAllBy()
